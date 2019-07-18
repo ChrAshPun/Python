@@ -1,0 +1,6 @@
+def intro():   
+   
+    print("WELCOME TO BLACKJACK") 
+    print("\nThis version of Blackjack does not allow splits.")
+    print("The Dealer hits until 17 or more.")
+    print("\nYour starting amount of chips is: 100")
