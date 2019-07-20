@@ -83,10 +83,9 @@ def continue_game():
 
         x = input("Play again? Enter 'y' or 'n': ")
             
-        if x[0].lower()=='y' and len(x) == 1:
-            game_on = False
+        if x.lower()=='y':
             return True
-        elif x[0].lower()=='n' and len(x) == 1:
+        elif x.lower()=='n':
             print("Thanks for playing!")
             break
         else:

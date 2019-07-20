@@ -59,16 +59,6 @@ empty7 = [0] + [' ' for x in range(1,7)]
 
 empty = [0,empty1,empty2,empty3,empty4,empty5,empty6,empty7]
 
-'''
-empty1 = [' ' for x in range(1,8)]
-empty2 = [' ' for x in range(1,8)]
-empty3 = [' ' for x in range(1,8)]
-empty4 = [' ' for x in range(1,8)]
-empty5 = [' ' for x in range(1,8)]
-empty6 = [' ' for x in range(1,8)]
-empty7 = [' ' for x in range(1,8)]
-'''
-
 # create display_board()
 def display_board():
 
@@ -145,24 +135,51 @@ def place_marker(slot,y_value,player):
 def win_check(slot,y_value):
 
     # vertical Connect4
-    all(x == player for x in empty[slot][1:5])
-    all(x == player for x in empty[slot][2:6])
-    all(x == player for x in empty[slot][3:7])
+    return (all(x == player for x in empty[slot][1:5]) or
+    all(x == player for x in empty[slot][2:6]) or
+    all(x == player for x in empty[slot][3:7]) or
 
     # horizontal Connect4
-    player == empty[1][y_value] == empty[2][y_value] == empty[3][y_value] == empty[4][y_value]
-    player == empty[2][y_value] == empty[3][y_value] == empty[4][y_value] == empty[5][y_value]
-    player == empty[3][y_value] == empty[4][y_value] == empty[5][y_value] == empty[6][y_value]
-    player == empty[4][y_value] == empty[5][y_value] == empty[6][y_value] == empty[7][y_value]
+    player == empty[1][y_value] == empty[2][y_value] == empty[3][y_value] == empty[4][y_value] or
+    player == empty[2][y_value] == empty[3][y_value] == empty[4][y_value] == empty[5][y_value] or
+    player == empty[3][y_value] == empty[4][y_value] == empty[5][y_value] == empty[6][y_value] or
+    player == empty[4][y_value] == empty[5][y_value] == empty[6][y_value] == empty[7][y_value] or
+  
+    # forward slash
+    # diagonal Connect4 for slot 1
+    player == empty[1][3] == empty[2][4] == empty[3][5] == empty[4][6] or
+    player == empty[1][2] == empty[2][3] == empty[3][4] == empty[4][5] or
+    player == empty[1][1] == empty[2][2] == empty[3][3] == empty[4][4] or  
+    # diagonal Connect4 for slot 2
+    player == empty[2][3] == empty[3][4] == empty[4][5] == empty[5][6] or
+    player == empty[2][2] == empty[3][3] == empty[4][4] == empty[5][5] or 
+    player == empty[2][1] == empty[3][2] == empty[4][3] == empty[5][4] or 
+    # diagonal Connect4 for slot 3
+    player == empty[3][3] == empty[4][4] == empty[5][5] == empty[6][6] or 
+    player == empty[3][2] == empty[4][3] == empty[5][4] == empty[6][5] or
+    player == empty[3][1] == empty[4][2] == empty[5][3] == empty[6][4] or  
+    # diagonal Connect4 for slot 4
+    player == empty[4][3] == empty[5][4] == empty[6][5] == empty[7][6] or
+    player == empty[4][2] == empty[5][3] == empty[6][4] == empty[7][5] or
+    player == empty[4][1] == empty[5][2] == empty[6][3] == empty[7][4] or 
 
-
-
-
-
-
-
-
-
+    #back slash
+    # diagonal Connect4 for slot 1
+    player == empty[1][6] == empty[2][5] == empty[3][4] == empty[4][3] or
+    player == empty[1][5] == empty[2][4] == empty[3][3] == empty[4][2] or
+    player == empty[1][4] == empty[2][3] == empty[3][2] == empty[4][1] or
+    # diagonal Connect4 for slot 2
+    player == empty[2][6] == empty[3][5] == empty[4][4] == empty[5][3] or
+    player == empty[2][5] == empty[3][4] == empty[4][3] == empty[5][2] or  
+    player == empty[2][4] == empty[3][3] == empty[4][2] == empty[5][1] or  
+    # diagonal Connect4 for slot 3
+    player == empty[3][6] == empty[4][5] == empty[5][4] == empty[6][3] or 
+    player == empty[3][5] == empty[4][4] == empty[5][3] == empty[6][2] or
+    player == empty[3][4] == empty[4][3] == empty[5][2] == empty[6][1] or  
+    # diagonal Connect4 for slot 4
+    player == empty[4][6] == empty[5][5] == empty[6][4] == empty[7][3] or
+    player == empty[4][5] == empty[5][4] == empty[6][3] == empty[7][2] or
+    player == empty[4][4] == empty[5][3] == empty[6][2] == empty[7][1])  
 
 # create the x & y coordinates
 xcoor= [x for x in range(1,8)]
@@ -184,6 +201,29 @@ slot6 = [0] + grid[31:37]
 slot7 = [0] + grid[37:43]
 
 slots = [0,slot1,slot2,slot3,slot4,slot5,slot6,slot7]
+
+def full_grid_check(empty):
+    
+    # check for empty spaces
+    return ' ' not in (empty1 + empty2 + empty3 + empty4 + empty5 + empty6 + empty7)
+
+def continue_game():
+    
+    while True:
+
+        x = input("Play again? Enter 'y' or 'n': ")
+            
+        if x.lower()=='y':
+            return True
+        elif x.lower()=='n':
+            print("Thanks for playing!")
+            break
+        else:
+            print("Sorry, please try again.")
+            continue
+
+
+
 
 # players[1] == 'X' and players[-1] == 'O'
 players = [0,'X','O']
@@ -224,3 +264,25 @@ while play_game:
         slot = player_choice(player)
         y_value = find_depth(slot)
         place_marker(slot,y_value,player)
+
+        # check for a win
+        if win_check(slot,y_value):
+            clear_output()
+            display_board()
+            print('Player '+player+' wins!')
+            game_on = False
+        else:
+            # check for a tie
+            if full_grid_check(empty):
+                clear_output()
+                display_board()
+                print("It's a tie!")
+                break
+            else:
+                # other player's turn
+                toggle *= -1
+                player = players[toggle]
+                clear_output()
+
+    # play again?
+    play_game = continue_game()
