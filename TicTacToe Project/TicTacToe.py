@@ -81,7 +81,7 @@ def continue_game():
     
     while True:
 
-        x = input("Play again? Enter 'y' or 'n': ")
+        x = input("Play again? Enter y or n: ")
             
         if x.lower()=='y':
             return True
