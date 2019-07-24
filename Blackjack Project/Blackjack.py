@@ -97,7 +97,7 @@ def hit_or_stand(deck,hand):
     
     while True:
         
-        x = input("Would you like to Hit or Stand? Enter h or s: ")
+        x = input("\nWould you like to Hit or Stand? Enter h or s: ")
             
         if x == 'h':
             hit(deck,hand)  # hit() function defined above
@@ -114,109 +114,119 @@ def hit_or_stand(deck,hand):
             print("Sorry, please enter h or s.")
             continue
 
-def show_some(player,dealer):
-    
-    if len(player.cards) == 2:
+def show_dealer_some(dealer):
+
+    print("\nDealer's Hand:")
+
+    print("                -------    ")
+    print("               | {}    |   ".format(values_visual[dealer.cards[1].rank]))
+    print("               |       |   ")
+    print("            ---|       |   ")
+    print("           | ? |       |   ")
+    print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
+    print("           |    -------   ")
+    print("           |       |      ")
+    print("           |     ? |      ")
+    print("            -------       ")
+    print("              {}           ".format(dealer.cards[1]))
+    print("              {}           \n".format("?     of     ?"))
+
+def show_dealer_all(dealer):
+
+    if len(dealer.cards) == 2:
+
+        print("\nDealer's Hand:")
+
+        print("                -------    ")
+        print("               | {}    |   ".format(values_visual[dealer.cards[1].rank]))
+        print("               |       |   ")
+        print("            ---|       |   ")
+        print("           | {}|       |   ".format(values_visual[dealer.cards[0].rank]))
+        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
+        print("           |    -------   ")
+        print("           |       |      ")
+        print("           |     {}|      ".format(values_visual[dealer.cards[0].rank]))
+        print("            -------       ")
+        print("              {}           ".format(dealer.cards[1]))
+        print("              {}           \n".format("?     of     ?"))
         
-        print("\nDealer's Hand:")
-
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[dealer.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | ? |       |   ")
-        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------   ")
-        print("           |       |      ")
-        print("           |     ? |      ")
-        print("            -------       ")
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format("?     of     ?"))
-
-        print("\n \n")
-
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[player.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | {}|       |   ".format(values_visual[player.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[player.cards[1].rank]))
-        print("           |    ------    ")
-        print("           |       |     ")
-        print("           |     {}|      ".format(values_visual[player.cards[0].rank]))
-        print("            -------      ")
-        print("              {}           ".format(player.cards[1]))
-        print("              {}           ".format(player.cards[0]))
-        print("\n           Current Bet: {}".format(player_chips.bet))
-        print("           Total Chips: {}".format(player_chips.total))
-        print("\nPlayer's Hand:")
-    
-    elif len(player.cards) == 3:
+    elif len(dealer.cards) == 3:
 
         print("\nDealer's Hand:")
 
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[dealer.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | ? |       |   ")
-        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------   ")
-        print("           |       |      ")
-        print("           |     ? |      ")
-        print("            -------       ")
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format("?     of     ?"))
-
-        print("\n \n")
- 
         print("                    ------- ")
-        print("                   | {}    |".format(values_visual[player.cards[2].rank]))
+        print("                   | {}    |".format(values_visual[dealer.cards[2].rank]))
         print("                   |       |")
         print("                ---|       |")
-        print("               | {}|       |".format(values_visual[player.cards[1].rank]))
-        print("               |   |     {}|".format(values_visual[player.cards[2].rank]))
+        print("               | {}|       |".format(values_visual[dealer.cards[1].rank]))
+        print("               |   |     {}|".format(values_visual[dealer.cards[2].rank]))
         print("            ---|    ------- ")
-        print("           | {}|       |    ".format(values_visual[player.cards[0].rank]))
-        print("           |   |     {}|    ".format(values_visual[player.cards[1].rank]))
+        print("           | {}|       |    ".format(values_visual[dealer.cards[0].rank]))
+        print("           |   |     {}|    ".format(values_visual[dealer.cards[1].rank]))
         print("           |    -------     ")
         print("           |       |        ")
-        print("           |     {}|        ".format(values_visual[player.cards[0].rank]))
+        print("           |     {}|        ".format(values_visual[dealer.cards[0].rank]))
         print("            -------         ")
-        print("              {}           ".format(player.cards[2]))
-        print("              {}           ".format(player.cards[1]))
-        print("              {}           ".format(player.cards[0]))
-        print("\n           Current Bet: {}".format(player_chips.bet))
-        print("           Total Chips: {}".format(player_chips.total))
-        print("\nPlayer's Hand:")
+        print("              {}           ".format(dealer.cards[2]))
+        print("              {}           ".format(dealer.cards[1]))
+        print("              {}           \n".format(dealer.cards[0]))
 
-              
-    elif len(player.cards) == 4:
+    elif len(dealer.cards) == 4:
 
         print("\nDealer's Hand:")
 
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[dealer.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | ? |       |   ")
-        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------   ")
-        print("           |       |      ")
-        print("           |     ? |      ")
-        print("            -------       ")
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format("?     of     ?"))
-
-        print("\n \n")
- 
         print("                        ------- ")
-        print("                       | {}    |".format(values_visual[player.cards[3].rank]))
+        print("                       | {}    |".format(values_visual[dealer.cards[3].rank]))
         print("                       |       |")
         print("                    ---|       |")
-        print("                   | {}|       |".format(values_visual[player.cards[2].rank]))
-        print("                   |   |     {}|".format(values_visual[player.cards[3].rank]))
+        print("                   | {}|       |".format(values_visual[dealer.cards[2].rank]))
+        print("                   |   |     {}|".format(values_visual[dealer.cards[3].rank]))
         print("                ---|    ------- ")
+        print("               | {}|       |".format(values_visual[dealer.cards[1].rank]))
+        print("               |   |     {}|".format(values_visual[dealer.cards[2].rank]))
+        print("            ---|    ------- ")
+        print("           | {}|       |    ".format(values_visual[dealer.cards[0].rank]))
+        print("           |   |     {}|    ".format(values_visual[dealer.cards[1].rank]))
+        print("           |    -------     ")
+        print("           |       |        ")
+        print("           |     {}|        ".format(values_visual[dealer.cards[0].rank]))
+        print("            -------         ")
+        print("              {}           ".format(dealer.cards[3]))        
+        print("              {}           ".format(dealer.cards[2]))
+        print("              {}           ".format(dealer.cards[1]))
+        print("              {}           \n".format(dealer.cards[0]))
+        
+    else:
+        print("\nDealer's Hand: \n")
+        for card in dealer_hand.cards:
+            print("           " + str(card))
+
+def show_player_all(player):
+
+    if len(player.cards) == 2:
+
+        print("                -------    ")
+        print("               | {}    |   ".format(values_visual[player.cards[1].rank]))
+        print("               |       |   ")
+        print("            ---|       |   ")
+        print("           | {}|       |   ".format(values_visual[player.cards[0].rank]))
+        print("           |   |     {}|   ".format(values_visual[player.cards[1].rank]))
+        print("           |    ------    ")
+        print("           |       |     ")
+        print("           |     {}|      ".format(values_visual[player.cards[0].rank]))
+        print("            -------      ")
+        print("              {}           ".format(player.cards[1]))
+        print("              {}           ".format(player.cards[0]))
+        print("\n           Current Bet: {}".format(player_chips.bet))
+        print("           Total Chips: {}".format(player_chips.total))
+        print("\nPlayer's Hand:")
+
+    elif len(player.cards) == 3:
+
+        print("                    ------- ")
+        print("                   | {}    |".format(values_visual[player.cards[2].rank]))
+        print("                   |       |")
+        print("                ---|       |")
         print("               | {}|       |".format(values_visual[player.cards[1].rank]))
         print("               |   |     {}|".format(values_visual[player.cards[2].rank]))
         print("            ---|    ------- ")
@@ -226,7 +236,6 @@ def show_some(player,dealer):
         print("           |       |        ")
         print("           |     {}|        ".format(values_visual[player.cards[0].rank]))
         print("            -------         ")
-        print("              {}           ".format(player.cards[3]))        
         print("              {}           ".format(player.cards[2]))
         print("              {}           ".format(player.cards[1]))
         print("              {}           ".format(player.cards[0]))
@@ -234,182 +243,7 @@ def show_some(player,dealer):
         print("           Total Chips: {}".format(player_chips.total))
         print("\nPlayer's Hand:")
 
-def show_all(player,dealer):
-    
-    if len(player.cards) == 2 and len(dealer.cards) == 2:
-        
-        print("\nDealer's Hand:")
-
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[dealer.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | {}|       |   ".format(values_visual[dealer.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------   ")
-        print("           |       |      ")
-        print("           |     {}|      ".format(values_visual[dealer.cards[0].rank]))
-        print("            -------       ")
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format(dealer.cards[0]))
-
-        print("\n \n")
-
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[player.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | {}|       |   ".format(values_visual[player.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[player.cards[1].rank]))
-        print("           |    ------    ")
-        print("           |       |     ")
-        print("           |     {}|      ".format(values_visual[player.cards[0].rank]))
-        print("            -------      ")
-        print("              {}           ".format(player.cards[1]))
-        print("              {}           ".format(player.cards[0]))
-        print("")
-        print("           Total Chips: {}".format(player_chips.total))
-        print("\nPlayer's Hand:")
-        
-    elif len(player.cards) == 3 and len(dealer.cards) == 2:
-
-        print("\nDealer's Hand:")
-
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[dealer.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | {}|       |   ".format(values_visual[dealer.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------   ")
-        print("           |       |      ")
-        print("           |     {}|      ".format(values_visual[dealer.cards[0].rank]))
-        print("            -------       ")
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format(dealer.cards[0]))
-
-        print("\n \n")
- 
-        print("                    ------- ")
-        print("                   | {}    |".format(values_visual[player.cards[2].rank]))
-        print("                   |       |")
-        print("                ---|       |")
-        print("               | {}|       |".format(values_visual[player.cards[1].rank]))
-        print("               |   |     {}|".format(values_visual[player.cards[2].rank]))
-        print("            ---|    ------- ")
-        print("           | {}|       |    ".format(values_visual[player.cards[0].rank]))
-        print("           |   |     {}|    ".format(values_visual[player.cards[1].rank]))
-        print("           |    -------     ")
-        print("           |       |        ")
-        print("           |     {}|        ".format(values_visual[player.cards[0].rank]))
-        print("            -------         ")
-        print("              {}           ".format(player.cards[2]))
-        print("              {}           ".format(player.cards[1]))
-        print("              {}           ".format(player.cards[0]))
-        print("")
-        print("           Total Chips: {}".format(player_chips.total))
-        print("\nPlayer's Hand:")
-        
-    elif len(player.cards) == 2 and len(dealer.cards) == 3:
-
-        print("\nDealer's Hand:")
-
-        print("                    ------- ")
-        print("                   | {}    |".format(values_visual[dealer.cards[2].rank]))
-        print("                   |       |")
-        print("                ---|       |")
-        print("               | {}|       |".format(values_visual[dealer.cards[1].rank]))
-        print("               |   |     {}|".format(values_visual[dealer.cards[2].rank]))
-        print("            ---|    ------- ")
-        print("           | {}|       |   ".format(values_visual[dealer.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------   ")
-        print("           |       |      ")
-        print("           |     {}|      ".format(values_visual[dealer.cards[0].rank]))
-        print("            -------       ")
-        print("              {}           ".format(dealer.cards[2]))
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format(dealer.cards[0]))
-
-        print("\n \n")
-        
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[player.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | {}|       |   ".format(values_visual[player.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[player.cards[1].rank]))
-        print("           |    ------    ")
-        print("           |       |     ")
-        print("           |     {}|      ".format(values_visual[player.cards[0].rank]))
-        print("            -------      ")
-        print("              {}           ".format(player.cards[1]))
-        print("              {}           ".format(player.cards[0]))
-        print("")
-        print("           Total Chips: {}".format(player_chips.total))
-        print("\nPlayer's Hand:")
-    
-    elif len(player.cards) == 3 and len(dealer.cards) == 3:
-
-        print("\nDealer's Hand:")
-
-        print("                    ------- ")
-        print("                   | {}    |".format(values_visual[dealer.cards[2].rank]))
-        print("                   |       |")
-        print("                ---|       |")
-        print("               | {}|       |".format(values_visual[dealer.cards[1].rank]))
-        print("               |   |     {}|".format(values_visual[dealer.cards[2].rank]))
-        print("            ---|    ------- ")
-        print("           | {}|       |   ".format(values_visual[dealer.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------   ")
-        print("           |       |      ")
-        print("           |     {}|      ".format(values_visual[dealer.cards[0].rank]))
-        print("            -------       ")
-        print("              {}           ".format(dealer.cards[2]))
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format(dealer.cards[0]))
-
-        print("\n \n")
- 
-        print("                    ------- ")
-        print("                   | {}    |".format(values_visual[player.cards[2].rank]))
-        print("                   |       |")
-        print("                ---|       |")
-        print("               | {}|       |".format(values_visual[player.cards[1].rank]))
-        print("               |   |     {}|".format(values_visual[player.cards[2].rank]))
-        print("            ---|    ------- ")
-        print("           | {}|       |    ".format(values_visual[player.cards[0].rank]))
-        print("           |   |     {}|    ".format(values_visual[player.cards[1].rank]))
-        print("           |    -------     ")
-        print("           |       |        ")
-        print("           |     {}|        ".format(values_visual[player.cards[0].rank]))
-        print("            -------         ")
-        print("              {}           ".format(player.cards[2]))
-        print("              {}           ".format(player.cards[1]))
-        print("              {}           ".format(player.cards[0]))
-        print("")
-        print("           Total Chips: {}".format(player_chips.total))
-        print("\nPlayer's Hand:")
-        
-    elif len(player.cards) == 4 and len(dealer.cards) == 2:
-
-        print("\nDealer's Hand:")
-
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[dealer.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | {}|       |   ".format(values_visual[dealer.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------   ")
-        print("           |       |      ")
-        print("           |     {}|      ".format(values_visual[dealer.cards[0].rank]))
-        print("            -------       ")
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format(dealer.cards[0]))
-
-        print("\n \n")
+    elif len(player.cards) == 4:
 
         print("                        -------  ")
         print("                       | {}    | ".format(values_visual[player.cards[3].rank]))
@@ -431,57 +265,14 @@ def show_all(player,dealer):
         print("              {}           ".format(player.cards[2]))
         print("              {}           ".format(player.cards[1]))
         print("              {}           ".format(player.cards[0]))
-        print("")
-        print("           Total Chips: {}".format(player_chips.total))
-        print("\nPlayer's Hand:")
-
-        
-    elif len(player.cards) == 2 and len(dealer.cards) == 4:
-        
-        print("                        -------  ")
-        print("                       | {}    | ".format(values_visual[dealer.cards[3].rank]))
-        print("                       |       | ")
-        print("                    ---|       | ")
-        print("                   | {}|       | ".format(values_visual[dealer.cards[2].rank]))
-        print("                   |   |     {}| ".format(values_visual[dealer.cards[3].rank]))
-        print("                ---|    -------  ")
-        print("               | {}|       |     ".format(values_visual[dealer.cards[1].rank]))
-        print("               |   |     {}|     ".format(values_visual[dealer.cards[2].rank]))
-        print("            ---|    -------      ")
-        print("           | {}|       |    ".format(values_visual[dealer.cards[0].rank]))
-        print("           |   |     {}|    ".format(values_visual[dealer.cards[1].rank]))
-        print("           |    -------     ")
-        print("           |       |        ")
-        print("           |     {}|        ".format(values_visual[dealer.cards[0].rank]))
-        print("            -------         ")
-        print("              {}           ".format(dealer.cards[3]))
-        print("              {}           ".format(dealer.cards[2]))
-        print("              {}           ".format(dealer.cards[1]))
-        print("              {}           ".format(dealer.cards[0]))
-        
-        print("\n \n")
-        
-        print("                -------    ")
-        print("               | {}    |   ".format(values_visual[player.cards[1].rank]))
-        print("               |       |   ")
-        print("            ---|       |   ")
-        print("           | {}|       |   ".format(values_visual[player.cards[0].rank]))
-        print("           |   |     {}|   ".format(values_visual[player.cards[1].rank]))
-        print("           |    ------    ")
-        print("           |       |     ")
-        print("           |     {}|      ".format(values_visual[player.cards[0].rank]))
-        print("            -------      ")
-        print("              {}           ".format(player.cards[1]))
-        print("              {}           ".format(player.cards[0]))
-        print("")
+        print("\n           Current Bet: {}".format(player_chips.bet))
         print("           Total Chips: {}".format(player_chips.total))
         print("\nPlayer's Hand:")
         
     else:
-        print("\nDealer's Hand:", *dealer.cards, sep='\n ')
-        print("Dealer's Hand =",dealer.value)
-        print("\nPlayer's Hand:", *player.cards, sep='\n ')
-        print("Player's Hand =",player.value)
+        print("\nPlayer's Hand: \n")
+        for card in player_hand.cards:
+            print("           " + str(card))
 
 def player_busts(player,dealer,chips):
     print("\nPlayer busts!")
@@ -502,99 +293,125 @@ def dealer_wins(player,dealer,chips):
 def push(player,dealer):
     print("\nDealer and Player tie! It's a push.")
 
-def continue_game():
-    
-    while True:
-
-        x = input("Play again? Enter y or n: ")
-            
-        if x.lower()=='y':
-            return True
-        elif x.lower()=='n':
-            print("Thanks for playing!")
-            break
-        else:
-            print("Sorry, please try again.")
-            continue
-
-print("\nWelcome to Blackjack!") 
-print("\nThis version of Blackjack does not allow splits.")
-print("The Dealer hits until 17 or more.")
-print("\nYour starting amount of chips is: 100")
-player_chips = Chips()
-
 game_on = True
+intro = True
+deal_cards = False
+playing = False
 
 while game_on:
 
-    # Create & shuffle the deck, deal two cards to each player
-    deck = Deck()
-    deck.shuffle()
+    while intro:
+        clear_output()
+        print("\nWelcome to Blackjack!") 
+        print("\nThis version of Blackjack does not allow splits.")
+        print("The Dealer hits until 17 or more.")
+        print("\nYour starting amount of chips is: 100")
+        player_chips = Chips()
+        deal_cards = True
+        break
 
-    player_hand = Hand()
-    player_hand.add_card(deck.deal())
-    player_hand.add_card(deck.deal())
+    while deal_cards:
 
-    dealer_hand = Hand()
-    dealer_hand.add_card(deck.deal())
-    dealer_hand.add_card(deck.deal())
-        
-    # Prompt the Player for their bet
-    take_bet(player_chips)
-    clear_output()
+        # create & shuffle the deck, deal two cards to each player
+        deck = Deck()
+        deck.shuffle()
 
-    # Show cards (but keep one dealer card hidden)
-    show_some(player_hand,dealer_hand)
-        
-    playing = True
+        player_hand = Hand()
+        player_hand.add_card(deck.deal())
+        player_hand.add_card(deck.deal())
+
+        dealer_hand = Hand()
+        dealer_hand.add_card(deck.deal())
+        dealer_hand.add_card(deck.deal())
+            
+        # prompt the Player for their bet
+        take_bet(player_chips)
+        clear_output()
+
+        # show cards (but keep one dealer card hidden)
+        show_dealer_some(dealer_hand)
+        show_player_all(player_hand)
+        playing = True
+        break
 
     while playing:  # recall this variable from our hit_or_stand function
 
-        # Prompt Player to Hit or Stand
+        # prompt Player to Hit or Stand
         hit_or_stand(deck,player_hand) 
         clear_output()
 
-        # Show cards (but keep one dealer card hidden)
-        show_some(player_hand,dealer_hand)  
+        # show cards (but keep one dealer card hidden)
+        show_dealer_some(dealer_hand)
+        show_player_all(player_hand)
 
-        # If player's hand exceeds 21, run player_busts() and break out of loop
+        # if player's hand exceeds 21, run player_busts() and break out of loop
         if player_hand.value > 21:
-            show_some(player_hand,dealer_hand)
             clear_output()
             player_busts(player_hand,dealer_hand,player_chips)
-            break        
+            break
 
-    # If Player hasn't busted, play Dealer's hand until Dealer reaches 17 
-        
+    # if player hasn't busted, play Dealer's hand until Dealer reaches 17             
     if player_hand.value <= 21:
 
         while dealer_hand.value < 17:
+
             hit(deck,dealer_hand)    
-            '''
-            # Show all cards
-            show_all(player_hand,dealer_hand)
-            '''
-            # Run different winning scenarios
-            if dealer_hand.value > 21:
-                dealer_busts(player_hand,dealer_hand,player_chips)
+ 
+        # Run different winning scenarios
+        clear_output()
+        if dealer_hand.value > 21:
+            dealer_busts(player_hand,dealer_hand,player_chips)
 
-            elif dealer_hand.value > player_hand.value:
-                dealer_wins(player_hand,dealer_hand,player_chips)
+        elif dealer_hand.value > player_hand.value:
+            dealer_wins(player_hand,dealer_hand,player_chips)
 
-            elif dealer_hand.value < player_hand.value:
-                player_wins(player_hand,dealer_hand,player_chips)
+        elif dealer_hand.value < player_hand.value:
+            player_wins(player_hand,dealer_hand,player_chips)
 
-            else:
-                push(player_hand,dealer_hand)        
+        else:
+            push(player_hand,dealer_hand)        
 
     # Inform Player of their chips total 
-    show_all(player_hand,dealer_hand)
+    show_dealer_all(dealer_hand)
+    show_player_all(player_hand)
     print("\nTotal Chips: {}".format(player_chips.total))
-        
+
+    # if player busts, ask if they want to play again
     if player_chips.total == 0:
-        print("Sorry, you ran out of chips!")
-        print("Game Over!")
-        game_on = continue_game()  
+
+        print("\nSorry, you ran out of chips!")
+        print("Game Over!\n")
+
+        while player_chips.total == 0:
+
+            x = input("Play again? Enter y or n: ")
+            if x == 'y' or x == 'n':
+                break
+            else:
+                print("Please try again")  
+                                    
+        if x == 'y':
+            intro = True
+            continue
+        else:
+            print("Thanks for playing!")
+            break   
+
     else:
-        # Ask to play again
-        game_on = continue_game()
+        
+        # if player still has chips, ask if they want to keep playing
+        while player_chips.total > 0:
+
+            x = input("Do you want to play another hand?")
+            if x == 'y' or x == 'n':
+                break
+            else:
+                print("Please try again")  
+      
+        if x == 'y':
+            intro = False
+            deal_cards = True
+            continue
+        else:
+            print("Thanks for playing!")
+            break
