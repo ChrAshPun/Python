@@ -27,42 +27,227 @@ def display_board(a,b):
     print("    A   B   C   D   E")
 
 
-coordinates = [0] + [[x for x in [0,'1','2','3','4','5']] for x in [0,'A','B','C','D','E']]
-
-coordinates[1][5]
-
-mygrid = [[' ' for x in range(6)] for x in range(6)]
-
-aigrid = [[' ' for x in range(6)] for x in range(6)]
-
-display_board(mygrid,aigrid)
-
-display_board(coordinates,coordinates)
-
 x_coor = {'A':1,'B':2,'C':3,'D':4,'E':5}
 
-largeship = []
+coordinates = [0] + [[x for x in [0,'1','2','3','4','5']] for x in [0,'A','B','C','D','E']]
 
-while True:
-    x = str(input("Enter the first coordinate: "))
+mygrid = [0] + [[0] + [' ' for x in range(5)] for x in range(5)]
 
-    if len(x) != 2:
-        continue
-    else:
-        if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and mygrid[x_coor[x[0].upper()]][int(x[1])] == ' ':
-            mygrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
-            largeship.append(x)
+aigrid = [0] + [[0] + [' ' for x in range(5)] for x in range(5)]
+
+def check_vertical_placement(largeship):
+    
+    while True:
+        if int(largeship[0][1]) + 1 == int(largeship[1][1]) and int(largeship[1][1]) + 1 == int(largeship[2][1]):
+            print("This works.")
             break
         else:
+            print("These coordinates are not next to each other.")
+            largeship = []
+            lship1 = 1
             continue
 
-largeship[0][1] == largeship[1][1] == largeship[2][1]
-
-def check_horizontal():
+def check_horizontal_placement(largeship):
     
-    if x_coor[largeship[0][0].upper()] + 1 == x_coor[largeship[1][0].upper()] and x_coor[largeship[1][0].upper()]  + 1 == x_coor[largeship[2][0].upper()]:
-        print("This works.")
-    else:
-        print("These coordinates are not next to each other.")
+    while True:
+        if x_coor[largeship[0][0].upper()] + 1 == x_coor[largeship[1][0].upper()] and x_coor[largeship[1][0].upper()]  + 1 == x_coor[largeship[2][0].upper()]:
+            print("This works.")
+            break
+        else:
+            print("These coordinates are not next to each other.")
+            largeship = []
+            lship1 = 1
+            continue
 
-list.sort()
+intro = True
+game_start = True
+
+while game_start:
+
+    # Introduction
+    while intro:
+        print("\nWelcome to Battleship!") 
+        print("Place your battleships onto the board.")
+        largeship = []
+        mediumship1 = []
+        mediumship2 = []
+        smallship = []
+        counter = 1
+        
+        place_largeship = True
+        break
+    
+    # ask player to place 4 battleships onto their board
+    while place_largeship:
+        
+        largeship = []
+        counter = 1
+        
+        # place the large battleship first
+        # ask the player to input 3 coordinates for the large battleship and then break
+        while len(largeship) < 3:
+            
+            x = str(input("Enter coordinate " + str(counter) + " for the large ship:"))
+
+            if len(x) != 2:
+                continue
+            else:
+                # accept the input if the space is empty
+                if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and mygrid[x_coor[x[0].upper()]][int(x[1])] == ' ' and x not in largeship:
+                    mygrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
+                    display_board(mygrid,aigrid)
+                    largeship.append(x)
+                    counter += 1 
+                    continue
+                else:
+                    continue
+
+        largeship.sort()
+        
+        # check if the ship was placed vertically
+        if largeship[0][0] == largeship[1][0] == largeship[2][0]:
+            if int(largeship[0][1]) + 1 == int(largeship[1][1]) and int(largeship[1][1]) + 1 == int(largeship[2][1]):
+                print("This works.")
+                place_largeship = False
+                place_mediumship1 = True
+                break
+                
+            else:
+                print("These coordinates are not next to each other.")
+                mygrid[x_coor[largeship[0][0].upper()]][int(largeship[0][1])] = ' '
+                mygrid[x_coor[largeship[1][0].upper()]][int(largeship[1][1])] = ' '
+                mygrid[x_coor[largeship[2][0].upper()]][int(largeship[2][1])] = ' '
+                continue
+                
+        # check if the ship was placed horizontally
+        elif largeship[0][1] == largeship[1][1] == largeship[2][1]:
+            if x_coor[largeship[0][0].upper()] + 1 == x_coor[largeship[1][0].upper()] and x_coor[largeship[1][0].upper()]  + 1 == x_coor[largeship[2][0].upper()]:
+                print("This works.")
+                place_largeship = False
+                place_mediumship1 = True
+                break
+                
+            else:
+                print("These coordinates are not next to each other.")
+                mygrid[x_coor[largeship[0][0].upper()]][int(largeship[0][1])] = ' '
+                mygrid[x_coor[largeship[1][0].upper()]][int(largeship[1][1])] = ' '
+                mygrid[x_coor[largeship[2][0].upper()]][int(largeship[2][1])] = ' '
+                continue
+        else:
+            print("These coordinates are not next to each other.")
+            print("Place the battleship vertically or horizontally on the board.")
+            mygrid[x_coor[largeship[0][0].upper()]][int(largeship[0][1])] = ' '
+            mygrid[x_coor[largeship[1][0].upper()]][int(largeship[1][1])] = ' '
+            mygrid[x_coor[largeship[2][0].upper()]][int(largeship[2][1])] = ' '
+            continue
+            
+    while place_mediumship1:
+        
+        mediumship1 = []
+        counter = 1
+                    
+        while len(mediumship1) < 2:
+
+            x = str(input("Enter coordinate " + str(counter) + " for the first medium ship:"))
+
+            if len(x) != 2:
+                continue
+            else:
+                # accept the input if the space is empty
+                if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and mygrid[x_coor[x[0].upper()]][int(x[1])] == ' ' and x not in mediumship1:
+                    mygrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
+                    display_board(mygrid,aigrid)
+                    mediumship1.append(x)
+                    counter += 1 
+                    continue
+                else:
+                    continue
+        
+        mediumship1.sort()
+
+        # check if the ship was placed vertically
+        if mediumship1[0][0] == mediumship1[1][0]:
+            if int(mediumship1[0][1]) + 1 == int(mediumship1[1][1]):
+                print("This works.")
+                place_mediumship1 = False
+                place_mediumship2 = True
+                break
+            else:
+                print("These coordinates are not next to each other.")
+                mygrid[x_coor[mediumship1[0][0].upper()]][int(mediumship1[0][1])] = ' '
+                mygrid[x_coor[mediumship1[1][0].upper()]][int(mediumship1[1][1])] = ' '
+                continue
+
+        # check if the ship was placed horizontally
+        elif mediumship1[0][1] == mediumship1[1][1]:
+            if x_coor[mediumship1[0][0].upper()] + 1 == x_coor[mediumship1[1][0].upper()]:
+                print("This works.")
+                place_mediumship1 = False
+                place_mediumship2 = True
+                break
+            else:
+                print("These coordinates are not next to each other.")
+                mygrid[x_coor[mediumship1[0][0].upper()]][int(mediumship1[0][1])] = ' '
+                mygrid[x_coor[mediumship1[1][0].upper()]][int(mediumship1[1][1])] = ' '
+                continue
+        else:
+            print("These coordinates are not next to each other.")
+            print("Place the battleship vertically or horizontally on the board.")
+            mygrid[x_coor[mediumship1[0][0].upper()]][int(mediumship1[0][1])] = ' '
+            mygrid[x_coor[mediumship1[1][0].upper()]][int(mediumship1[1][1])] = ' '
+            continue
+
+    while place_mediumship2:
+        
+        mediumship2 = []
+        counter = 1
+        print(largeship)
+        print(mediumship1)
+        print(mediumship2)
+                    
+        while len(mediumship2) < 2:
+
+            x = str(input("Enter coordinate " + str(counter) + " for the second medium ship:"))
+
+            if len(x) != 2:
+                continue
+            else:
+                # accept the input if the space is empty
+                if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and mygrid[x_coor[x[0].upper()]][int(x[1])] == ' ' and x not in mediumship2:
+                    mygrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
+                    display_board(mygrid,aigrid)
+                    mediumship2.append(x)
+                    counter += 1 
+                    continue
+                else:
+                    continue
+        
+        mediumship2.sort()
+
+        # check if the ship was placed vertically
+        if mediumship2[0][0] == mediumship2[1][0]:
+            if int(mediumship2[0][1]) + 1 == int(mediumship2[1][1]):
+                print("This works.")
+                break
+            else:
+                print("These coordinates are not next to each other.")
+                mygrid[x_coor[mediumship2[0][0].upper()]][int(mediumship2[0][1])] = ' '
+                mygrid[x_coor[mediumship2[1][0].upper()]][int(mediumship2[1][1])] = ' '
+                continue
+
+        # check if the ship was placed horizontally
+        elif mediumship2[0][1] == mediumship2[1][1]:
+            if x_coor[mediumship2[0][0].upper()] + 1 == x_coor[mediumship2[1][0].upper()]:
+                print("This works.")
+                break
+            else:
+                print("These coordinates are not next to each other.")
+                mygrid[x_coor[mediumship2[0][0].upper()]][int(mediumship2[0][1])] = ' '
+                mygrid[x_coor[mediumship2[1][0].upper()]][int(mediumship2[1][1])] = ' '
+                continue
+        else:
+            print("These coordinates are not next to each other.")
+            print("Place the battleship vertically or horizontally on the board.")
+            mygrid[x_coor[mediumship2[0][0].upper()]][int(mediumship2[0][1])] = ' '
+            mygrid[x_coor[mediumship2[1][0].upper()]][int(mediumship2[1][1])] = ' '
+            continue
