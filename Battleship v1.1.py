@@ -18,29 +18,250 @@ def display_board(a,b):
         print("    A   B   C   D   E            AI's Ships")
         print("   -------------------           -------------------")  
         print("5 | {} | {} | {} | {} | {} |          Battleship".format(b[1][5],b[2][5],b[3][5],b[4][5],b[5][5]))
-        print("  |-------------------|          O O O")
+        print("  |-------------------|          {}".format(ai_icon_battleship))
         print("4 | {} | {} | {} | {} | {} |          Cruiser 1".format(b[1][4],b[2][4],b[3][4],b[4][4],b[5][4]))
-        print("  |-------------------|          O O")
+        print("  |-------------------|          {}".format(ai_icon_mediumship1))
         print("3 | {} | {} | {} | {} | {} |          Cruiser 2".format(b[1][3],b[2][3],b[3][3],b[4][3],b[5][3]))
-        print("  |-------------------|          O O")
+        print("  |-------------------|          {}".format(ai_icon_mediumship2))
         print("2 | {} | {} | {} | {} | {} |          Submarine".format(b[1][2],b[2][2],b[3][2],b[4][2],b[5][2]))
-        print("  |-------------------|          O")
+        print("  |-------------------|          {}".format(ai_icon_smallship))
         print("1 | {} | {} | {} | {} | {} |".format(b[1][1],b[2][1],b[3][1],b[4][1],b[5][1]))
         print("  |-------------------|")
         print("  |||||||||||||||||||||          Player's Ships")
         print("  |-------------------|          -------------------")  
         print("5 | {} | {} | {} | {} | {} |          Battleship".format(a[1][5],a[2][5],a[3][5],a[4][5],a[5][5]))
-        print("  |-------------------|          O O O")
+        print("  |-------------------|          {}".format(icon_battleship))
         print("4 | {} | {} | {} | {} | {} |          Cruiser 1".format(a[1][4],a[2][4],a[3][4],a[4][4],a[5][4]))
-        print("  |-------------------|          O O")
+        print("  |-------------------|          {}".format(icon_mediumship1))
         print("3 | {} | {} | {} | {} | {} |          Cruiser 2".format(a[1][3],a[2][3],a[3][3],a[4][3],a[5][3]))
-        print("  |-------------------|          O O")
+        print("  |-------------------|          {}".format(icon_mediumship2))
         print("2 | {} | {} | {} | {} | {} |          Submarine".format(a[1][2],a[2][2],a[3][2],a[4][2],a[5][2]))
-        print("  |-------------------|          O")
+        print("  |-------------------|          {}".format(icon_smallship))
         print("1 | {} | {} | {} | {} | {} |".format(a[1][1],a[2][1],a[3][1],a[4][1],a[5][1]))
         print("   ------------------- ")
         print("    A   B   C   D   E\n")
         print("   Player's Ocean\n")
+
+def hit_or_miss():
+    
+    call_out = True
+    while call_out:
+            
+        x = str(input("Enter a coordinate: "))
+
+        if len(x) != 2:
+            continue
+        else:
+            # accept the input if the space on the hiddengrid is empty
+            if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and hiddengrid[x_coor[x[0].upper()]][int(x[1])] == ' ':
+                # if it's a hit
+                if aigrid[x_coor[x[0].upper()]][int(x[1])] == 'O':
+                    if x[0].upper() + x[1] in ai_largeship:
+                        for index, value in enumerate(ai_largeship):
+
+                            global ai_icon_battleship
+
+                            if value == x[0].upper() + x[1]:
+                                # remove the coordinate from the list
+                                ai_largeship.remove(x[0].upper() + x[1])
+                                # pop off one 'O' from the battleship icon
+                                ai_icon_battleship = ai_icon_battleship[:-2]
+                                # mark an 'O' on the hidden grid
+                                hiddengrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
+                                # if the list is empty, the ship has sunk
+                                if not ai_largeship:
+                                    print("Hit! AI's Battleship has sunk!")
+                                    call_out = False
+                                    break
+                                else:
+                                    print("Hit! Battleship!")
+                                    call_out = False
+                                    break
+                            else:
+                                continue
+                    elif x[0].upper() + x[1] in ai_mediumship2:
+                        for index, value in enumerate(ai_mediumship2):
+                            
+                            global ai_icon_mediumship2
+
+                            if value == x[0].upper() + x[1]:
+                                ai_mediumship2.remove(x[0].upper() + x[1])
+                                ai_icon_mediumship2 = ai_icon_mediumship2[:-2]
+                                hiddengrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
+                                if not ai_mediumship2:
+                                    print("Hit! AI's Cruiser #2 has sunk!")
+                                    call_out = False
+                                    break
+                                else:
+                                    print("Hit! Cruiser #2!")
+                                    call_out = False
+                                    break
+                            else:
+                                continue
+                    elif x[0].upper() + x[1] in ai_mediumship1:
+                        for index, value in enumerate(ai_mediumship1):
+
+                            global ai_icon_mediumship1
+
+                            if value == x[0].upper() + x[1]:
+                                ai_mediumship1.remove(x[0].upper() + x[1])
+                                ai_icon_mediumship1 = ai_icon_mediumship1[:-2]
+                                hiddengrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
+                                if not ai_mediumship1:
+                                    print("Hit! AI's Cruiser #1 has sunk!")
+                                    call_out = False
+                                    break
+                                else:
+                                    print("Hit! Cruiser #1!")
+                                    call_out = False
+                                    break
+                            else:
+                                continue
+                    elif x[0].upper() + x[1] in ai_smallship:
+                        for index, value in enumerate(ai_smallship):
+
+                            global ai_icon_smallship
+
+                            if value == x[0].upper() + x[1]:
+                                ai_smallship.remove(x[0].upper() + x[1])
+                                ai_icon_smallship = ai_icon_smallship[:-2]
+                                hiddengrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
+                                if not ai_smallship:
+                                    print("Hit! AI's Smallship has sunk!")
+                                    call_out = False
+                                    break
+                                else:
+                                    print("Hit! Smallship!")
+                                    call_out = False
+                                    break
+                            else:
+                                continue
+                else:
+                    # if it isn't a hit, mark an 'X' on the hidden grid
+                    hiddengrid[x_coor[x[0].upper()]][int(x[1])] = 'X'
+                    call_out = False
+                    break
+            else:
+                continue
+
+def ai_hit_or_miss():
+
+    call_out = True
+    while call_out:
+
+        x = random.choice(['A','B','C','D','E']) 
+        y = random.choice(['1','2','3','4','5']) 
+        
+        # if the AI called out an empty space say "Miss!" and do not change mygrid
+        if mygrid[x_coor[x]][int(y)] == ' ':
+            print("AI called out {}!".format(x+y))
+            print("Miss!")
+            mygrid[x_coor[x]][int(y)] = 'X'
+            break
+        
+        # if AI hit a ship
+        elif mygrid[x_coor[x]][int(y)] == 'O':
+            print("AI called out {}!".format(x+y))
+            if x + y in largeship:
+                for index, value in enumerate(largeship):
+
+                    global icon_battleship
+
+                    if value == x + y:
+                        # remove the coordinate from the list
+                        largeship.remove(x + y)
+                        icon_battleship = icon_battleship[:-2]
+                        # mark an 'O' on the hidden grid
+                        mygrid[x_coor[x]][int(y)] = 'X'
+                        # if the list is empty, the ship has sunk
+                        if not largeship:
+                            print("Hit! Player One's Battleship has sunk!")
+                            call_out = False
+                            break
+                        else:
+                            print("Hit! Battleship!")
+                            call_out = False
+                            break
+                    else:
+                        continue
+            elif x + y in mediumship2:
+                for index, value in enumerate(mediumship2):
+
+                    global icon_mediumship2
+
+                    if value == x + y:
+                        # remove the coordinate from the list
+                        mediumship2.remove(x + y)
+                        icon_mediumship2 = icon_mediumship2[:-2]
+                        # mark an 'O' on the hidden grid
+                        mygrid[x_coor[x]][int(y)] = 'X'
+                        # if the list is empty, the ship has sunk
+                        if not mediumship2:
+                            print("Hit! Player One's Cruiser #2 has sunk!")
+                            call_out = False
+                            break
+                        else:
+                            print("Hit! Cruiser #2!")
+                            call_out = False
+                            break
+                    else:
+                        continue
+            elif x + y in mediumship1:
+                for index, value in enumerate(mediumship1):
+
+                    global icon_mediumship1
+
+                    if value == x + y:
+                        # remove the coordinate from the list
+                        mediumship1.remove(x + y)
+                        icon_mediumship1 = icon_mediumship1[:-2]
+                        # mark an 'O' on the hidden grid
+                        mygrid[x_coor[x]][int(y)] = 'X'
+                        # if the list is empty, the ship has sunk
+                        if not mediumship1:
+                            print("Hit! Player One's Cruiser #1 has sunk!")
+                            call_out = False
+                            break
+                        else:
+                            print("Hit! Cruiser #1!")
+                            call_out = False
+                            break
+                    else:
+                        continue
+            elif x + y in smallship:
+                for index, value in enumerate(smallship):
+
+                    global icon_smallship
+
+                    if value == x + y:
+                        # remove the coordinate from the list
+                        smallship.remove(x + y)
+                        icon_smallship = icon_smallship[:-2]
+                        # mark an 'O' on the hidden grid
+                        mygrid[x_coor[x]][int(y)] = 'X'
+                        # if the list is empty, the ship has sunk
+                        if not smallship:
+                            print("Hit! Player One's Smallship has sunk!")
+                            call_out = False
+                            break
+                        else:
+                            print("Hit! Smallship!")
+                            call_out = False
+                            break
+                    else:
+                        continue
+        elif mygrid[x_coor[x]][int(y)] == 'X':
+            continue
+
+icon_battleship = ''
+icon_mediumship2 = ''
+icon_mediumship1 = ''
+icon_smallship = ''
+
+ai_icon_battleship = ''
+ai_icon_mediumship2 = ''
+ai_icon_mediumship1 = ''
+ai_icon_smallship = ''
 
 horizontal_or_vertical = ['h','v']
 
@@ -87,8 +308,9 @@ while game_start:
                 # accept the input if the space is empty
                 if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and mygrid[x_coor[x[0].upper()]][int(x[1])] == ' ' and x not in largeship:
                     mygrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
-                    display_board(mygrid,aigrid)
-                    largeship.append(x)
+                    icon_battleship += 'O '
+                    display_board(mygrid,hiddengrid)
+                    largeship.append(x[0].upper() + x[1])
                     counter += 1 
                     continue
                 else:
@@ -109,6 +331,7 @@ while game_start:
                 mygrid[x_coor[largeship[0][0].upper()]][int(largeship[0][1])] = ' '
                 mygrid[x_coor[largeship[1][0].upper()]][int(largeship[1][1])] = ' '
                 mygrid[x_coor[largeship[2][0].upper()]][int(largeship[2][1])] = ' '
+                icon_battleship = ''
                 continue
                 
         # check if the ship was placed horizontally
@@ -124,6 +347,7 @@ while game_start:
                 mygrid[x_coor[largeship[0][0].upper()]][int(largeship[0][1])] = ' '
                 mygrid[x_coor[largeship[1][0].upper()]][int(largeship[1][1])] = ' '
                 mygrid[x_coor[largeship[2][0].upper()]][int(largeship[2][1])] = ' '
+                icon_battleship = ''        
                 continue
         else:
             print("These coordinates are not next to each other.")
@@ -131,6 +355,7 @@ while game_start:
             mygrid[x_coor[largeship[0][0].upper()]][int(largeship[0][1])] = ' '
             mygrid[x_coor[largeship[1][0].upper()]][int(largeship[1][1])] = ' '
             mygrid[x_coor[largeship[2][0].upper()]][int(largeship[2][1])] = ' '
+            icon_battleship = ''
             continue
             
     while place_mediumship1:
@@ -150,8 +375,9 @@ while game_start:
                 # accept the input if the space is empty
                 if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and mygrid[x_coor[x[0].upper()]][int(x[1])] == ' ' and x not in mediumship1:
                     mygrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
-                    display_board(mygrid,aigrid)
-                    mediumship1.append(x)
+                    icon_mediumship1 += 'O '
+                    display_board(mygrid,hiddengrid)
+                    mediumship1.append(x[0].upper() + x[1])
                     counter += 1 
                     continue
                 else:
@@ -170,6 +396,7 @@ while game_start:
                 print("These coordinates are not next to each other.")
                 mygrid[x_coor[mediumship1[0][0].upper()]][int(mediumship1[0][1])] = ' '
                 mygrid[x_coor[mediumship1[1][0].upper()]][int(mediumship1[1][1])] = ' '
+                icon_mediumship1 = ''
                 continue
 
         # check if the ship was placed horizontally
@@ -183,12 +410,14 @@ while game_start:
                 print("These coordinates are not next to each other.")
                 mygrid[x_coor[mediumship1[0][0].upper()]][int(mediumship1[0][1])] = ' '
                 mygrid[x_coor[mediumship1[1][0].upper()]][int(mediumship1[1][1])] = ' '
+                icon_mediumship1 = ''
                 continue
         else:
             print("These coordinates are not next to each other.")
             print("Place the battleship vertically or horizontally on the board.")
             mygrid[x_coor[mediumship1[0][0].upper()]][int(mediumship1[0][1])] = ' '
             mygrid[x_coor[mediumship1[1][0].upper()]][int(mediumship1[1][1])] = ' '
+            icon_mediumship1 = ''
             continue
 
     while place_mediumship2:
@@ -211,8 +440,9 @@ while game_start:
                 # accept the input if the space is empty
                 if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and mygrid[x_coor[x[0].upper()]][int(x[1])] == ' ' and x not in mediumship2:
                     mygrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
-                    display_board(mygrid,aigrid)
-                    mediumship2.append(x)
+                    icon_mediumship2 += 'O '
+                    display_board(mygrid,hiddengrid)
+                    mediumship2.append(x[0].upper() + x[1])
                     counter += 1 
                     continue
                 else:
@@ -230,6 +460,7 @@ while game_start:
                 print("These coordinates are not next to each other.")
                 mygrid[x_coor[mediumship2[0][0].upper()]][int(mediumship2[0][1])] = ' '
                 mygrid[x_coor[mediumship2[1][0].upper()]][int(mediumship2[1][1])] = ' '
+                icon_mediumship2 = ''
                 continue
 
         # check if the ship was placed horizontally
@@ -242,12 +473,14 @@ while game_start:
                 print("These coordinates are not next to each other.")
                 mygrid[x_coor[mediumship2[0][0].upper()]][int(mediumship2[0][1])] = ' '
                 mygrid[x_coor[mediumship2[1][0].upper()]][int(mediumship2[1][1])] = ' '
+                icon_mediumship2 = ''
                 continue
         else:
             print("These coordinates are not next to each other.")
             print("Place the battleship vertically or horizontally on the board.")
             mygrid[x_coor[mediumship2[0][0].upper()]][int(mediumship2[0][1])] = ' '
             mygrid[x_coor[mediumship2[1][0].upper()]][int(mediumship2[1][1])] = ' '
+            icon_mediumship2 = ''
             continue
 
     while place_smallship:
@@ -267,8 +500,9 @@ while game_start:
                 # accept the input if the space is empty
                 if x[0].upper() in ['A','B','C','D','E'] and x[1] in ['1','2','3','4','5'] and mygrid[x_coor[x[0].upper()]][int(x[1])] == ' ' and x not in smallship:
                     mygrid[x_coor[x[0].upper()]][int(x[1])] = 'O'
-                    display_board(mygrid,aigrid)
-                    smallship.append(x)
+                    icon_smallship += 'O '
+                    display_board(mygrid,hiddengrid)
+                    smallship.append(x[0].upper() + x[1])
                     place_smallship = False
                     ai_place_largeship = True
                     break
@@ -296,7 +530,8 @@ while game_start:
                 aigrid[x][int(y)] = 'O'
                 aigrid[x+1][int(y)] = 'O'
                 aigrid[x+2][int(y)] = 'O'
-                display_board(mygrid, aigrid)
+                ai_icon_battleship = 'O O O '
+                display_board(mygrid,hiddengrid)
                 ai_place_largeship = False
                 ai_place_mediumship1 = True
                 break
@@ -317,7 +552,8 @@ while game_start:
                 aigrid[x_coor[x]][y] = 'O'
                 aigrid[x_coor[x]][y+1] = 'O'
                 aigrid[x_coor[x]][y+2] = 'O'
-                display_board(mygrid, aigrid)
+                ai_icon_battleship = 'O O O '
+                display_board(mygrid,hiddengrid)
                 ai_place_largeship = False
                 ai_place_mediumship1 = True
                 break
@@ -343,7 +579,8 @@ while game_start:
             if aigrid[x][int(y)] == aigrid[x+1][int(y)] == ' ':
                 aigrid[x][int(y)] = 'O'
                 aigrid[x+1][int(y)] = 'O'
-                display_board(mygrid, aigrid)
+                ai_icon_mediumship1 = 'O O '
+                display_board(mygrid,hiddengrid)
                 ai_place_mediumship1 = False
                 ai_place_mediumship2 = True
                 break
@@ -363,7 +600,8 @@ while game_start:
             if aigrid[x_coor[x]][y] == aigrid[x_coor[x]][y+1] == ' ':
                 aigrid[x_coor[x]][y] = 'O'
                 aigrid[x_coor[x]][y+1] = 'O'
-                display_board(mygrid, aigrid)
+                ai_icon_mediumship1 = 'O O '
+                display_board(mygrid,hiddengrid)
                 ai_place_mediumship1 = False
                 ai_place_mediumship2 = True
                 break
@@ -389,7 +627,8 @@ while game_start:
             if aigrid[x][int(y)] == aigrid[x+1][int(y)] == ' ':
                 aigrid[x][int(y)] = 'O'
                 aigrid[x+1][int(y)] = 'O'
-                display_board(mygrid, aigrid)
+                ai_icon_mediumship2 = 'O O '
+                display_board(mygrid,hiddengrid)
                 ai_place_mediumship2 = False
                 ai_place_smallship = True
                 break
@@ -408,7 +647,8 @@ while game_start:
             if aigrid[x_coor[x]][y] == aigrid[x_coor[x]][y+1] == ' ':
                 aigrid[x_coor[x]][y] = 'O'
                 aigrid[x_coor[x]][y+1] = 'O'
-                display_board(mygrid, aigrid)
+                ai_icon_mediumship2 = 'O O '
+                display_board(mygrid,hiddengrid)
                 ai_place_mediumship2 = False
                 ai_place_smallship = True
                 break
@@ -432,7 +672,8 @@ while game_start:
 
             if aigrid[x][int(y)] == ' ':
                 aigrid[x][int(y)] = 'O'
-                display_board(mygrid, aigrid)
+                ai_icon_smallship = 'O '
+                display_board(mygrid,hiddengrid)
                 ai_place_smallship = False
                 ai_game_start = False
                 break
@@ -449,7 +690,8 @@ while game_start:
             
             if aigrid[x_coor[x]][y] == ' ':
                 aigrid[x_coor[x]][y] = 'O'
-                display_board(mygrid, aigrid)
+                ai_icon_smallship = 'O '
+                display_board(mygrid,hiddengrid)
                 ai_place_smallship = False
                 ai_game_start = False
                 break
@@ -457,6 +699,35 @@ while game_start:
             else:
                 continue
     
-    display_board(mygrid, aigrid)
-    print(mygrid)
-    print(aigrid)
+    display_board(mygrid,hiddengrid)
+    print("AI has placed their ships on the board but they are hidden!\n")
+    print("Player One, it's your turn call out a shot!")
+
+    playing = True
+
+    while playing:
+
+        hit_or_miss()
+
+        display_board(mygrid,hiddengrid)
+
+        if not ai_largeship and not ai_mediumship1 and not ai_mediumship2 and not ai_smallship:
+            print("All of AI's ships have sunk!")
+            print("Congratulations! You won!")
+            game_start = False
+            break
+        else:
+            ai_hit_or_miss()
+
+            display_board(mygrid,hiddengrid)
+
+            if not largeship and not mediumship1 and not mediumship2 and not smallship:
+                print("All of Player One's ships have sunk!")
+                print("Game Over!")
+                game_start = False
+                break
+            else:
+                continue
+
+        
+
