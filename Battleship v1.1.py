@@ -281,9 +281,35 @@ while game_start:
 
     # Introduction
     while intro:
+
+        mygrid = [0] + [[0] + [' ' for x in range(5)] for x in range(5)]
+        aigrid = [0] + [[0] + [' ' for x in range(5)] for x in range(5)]
+        hiddengrid = [0] + [[0] + [' ' for x in range(5)] for x in range(5)]
+
+        # reset all values
+        largeship = []
+        mediumship1 = []
+        mediumship2 = []
+        smallship = []
+
+        icon_battleship = ''
+        icon_mediumship2 = ''
+        icon_mediumship1 = ''
+        icon_smallship = ''
+
+        ai_largeship = []
+        ai_mediumship1 = []
+        ai_mediumship2 = []
+        ai_smallship = []
+
+        ai_icon_battleship = ''
+        ai_icon_mediumship2 = ''
+        ai_icon_mediumship1 = ''
+        ai_icon_smallship = ''
+
         print("\nWelcome to Battleship!") 
-        print("Place your battleships onto the board.")
-        x = input("Press Enter to Continue: ")
+        print("Place your battleships onto the board.\n")
+        x = input("Press Enter to Start: ")
         
         place_largeship = True
         break
@@ -300,7 +326,9 @@ while game_start:
             
             clear_output()
             display_board(mygrid,hiddengrid)
-            x = str(input("Enter coordinate " + str(counter) + " for the large ship:"))
+
+            print("The Battleship uses 3 coordinates.") 
+            x = str(input("Enter coordinate " + str(counter) + " for the Battleship:"))
 
             if len(x) != 2:
                 continue
@@ -367,7 +395,8 @@ while game_start:
 
             clear_output()
             display_board(mygrid,hiddengrid)
-            x = str(input("Enter coordinate " + str(counter) + " for the first medium ship:"))
+            print("Cruiser #1 uses 2 coordinates.")
+            x = str(input("Enter coordinate " + str(counter) + " for Cruiser #1: "))
 
             if len(x) != 2:
                 continue
@@ -432,7 +461,8 @@ while game_start:
 
             clear_output()
             display_board(mygrid,hiddengrid)
-            x = str(input("Enter coordinate " + str(counter) + " for the second medium ship:"))
+            print("Cruiser #2 uses 2 coordinates.")
+            x = str(input("Enter coordinate " + str(counter) + " for Cruiser #2:"))
 
             if len(x) != 2:
                 continue
@@ -492,7 +522,8 @@ while game_start:
 
             clear_output()
             display_board(mygrid,hiddengrid)
-            x = str(input("Enter coordinate " + str(counter) + " for the small ship:"))
+            print("The Submarine uses 1 coordinate.")
+            x = str(input("Enter coordinate " + str(counter) + " for the Submarine:"))
 
             if len(x) != 2:
                 continue
@@ -700,8 +731,8 @@ while game_start:
                 continue
     
     display_board(mygrid,hiddengrid)
-    print("AI has placed their ships on the board but they are hidden!\n")
-    print("Player One, it's your turn call out a shot!")
+    print("AI has placed their ships onto the board but they are hidden!\n")
+    print("Player one, it's your turn call out a shot!")
 
     playing = True
 
@@ -713,9 +744,21 @@ while game_start:
 
         if not ai_largeship and not ai_mediumship1 and not ai_mediumship2 and not ai_smallship:
             print("All of AI's ships have sunk!")
-            print("Congratulations! You won!")
-            game_start = False
-            break
+            print("Congratulations! You won!\n")
+            while True:
+
+                x = input("Play again? Enter [y] or [n]: ")
+
+                if x == 'y':
+                    playing = False
+                    intro = True
+                    break
+                elif x == 'n':
+                    playing = False
+                    game_start = False
+                    break
+                else:
+                    continue
         else:
             ai_hit_or_miss()
 
@@ -723,9 +766,21 @@ while game_start:
 
             if not largeship and not mediumship1 and not mediumship2 and not smallship:
                 print("All of Player One's ships have sunk!")
-                print("Game Over!")
-                game_start = False
-                break
+                print("Game Over!\n")
+                while True:
+
+                    x = input("Play again? Enter [y] or [n]: ")
+
+                    if x == 'y':
+                        playing = False
+                        intro = True
+                        break
+                    elif x == 'n':
+                        playing = False
+                        game_start = False
+                        break
+                    else:
+                        continue
             else:
                 continue
 
