@@ -467,8 +467,11 @@ def display_value_two(value_two):
         print("|_________________|")
 
 def evaluate(value_one,operator,value_two):
-   
-    return ops[operator](float(value_one),float(value_two))
+
+    if value_two == '0' and operator == '/':
+        return ''
+    else:
+        return ops[operator](float(value_one),float(value_two))
 
 # Global variables
 digits = ['0','1','2','3','4','5','6','7','8','9']
@@ -641,7 +644,14 @@ while create_value_one:
             if value_two == "":
                 continue
             else:
-                if float(value_two) == 0.0:
+                # reset all values if divide by 0
+                if float(value_two) == 0.0 and operator == '/':
+                    value_one = ""
+                    value_two = ""
+                    operator = ""
+                    # go back to create_value_one loop
+                    break
+                elif float(value_two) == 0.0:
                     value_two = '0'
                     value_one = str(float(evaluate(value_one,operator,value_two)))
                     # if value_one ends in ".0" remove the last two indexes
@@ -672,8 +682,15 @@ while create_value_one:
             if value_two == "":
                 continue
             else:
+                # reset all values if divide by 0
+                if float(value_two) == 0.0 and operator == '/':
+                    value_one = ""
+                    value_two = ""
+                    operator = ""
+                    # go back to create_value_one loop
+                    break
                 # proceed to continue_or_break loop
-                if float(value_two) == 0.0:
+                elif float(value_two) == 0.0:
                     value_two = '0'
                     value_one = str(float(evaluate(value_one,operator,value_two)))
                     # if value_one ends in ".0" remove the last two indexes

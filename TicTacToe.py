@@ -19,24 +19,25 @@ def intro():
     print('-----------------')
     print('     |     |     ')
     print('  T  |  O  |  E  ')
-    print('     |     |     ')
+    print('     |     |     \n')
     
-    print('\nPlayer {} will go first!'.format(player))
+    # randomly pick which player goes first
+    print('Player {} will go first!'.format(player))
     i = input("Press Enter to continue: ")
 
-def display_board(board,available):
+def display_board(board,minimap):
     
-    print ('\n     |     |          '+available[7]+'|'+available[8]+'|'+available[9]+'')
-    print('  '+board[7]+'  '+'|'+'  '+board[8]+'  '+'|'+'  '+board[9]+'       -----')
-    print ('     |     |          '+available[4]+'|'+available[5]+'|'+available[6]+'')
-    print('-----------------     -----')
-    print ('     |     |          '+available[1]+'|'+available[2]+'|'+available[3]+'')
+    print ('\n     |     |        '+minimap[7]+'|'+minimap[8]+'|'+minimap[9]+'')
+    print('  '+board[7]+'  '+'|'+'  '+board[8]+'  '+'|'+'  '+board[9]+'     -----')
+    print ('     |     |        '+minimap[4]+'|'+minimap[5]+'|'+minimap[6]+'')
+    print('-----------------   -----')
+    print ('     |     |        '+minimap[1]+'|'+minimap[2]+'|'+minimap[3]+'')
     print('  '+board[4]+'  '+'|'+'  '+board[5]+'  '+'|'+'  '+board[6]+'')     
     print ('     |     |     ')
     print('-----------------')
     print ('     |     |     ')
     print('  '+board[1]+'  '+'|'+'  '+board[2]+'  '+'|'+'  '+board[3]+'')
-    print ('     |     |     ')
+    print ('     |     |     \n')
 
 def space_check(board, position):
     
@@ -47,7 +48,8 @@ def player_choice(board,player):
     
     position = 0
     
-    while position not in [1,2,3,4,5,6,7,8,9] or not space_check(board, position):
+    # ask player to pick an int between 1-9 and is also an empty space on board
+    while position not in range(1,10) or not space_check(board, position):
         try:
             position = int(input('Player {}\nChoose a space: '.format(player)))
         except ValueError:
@@ -57,12 +59,15 @@ def player_choice(board,player):
         
     return position
 
-def place_marker(available,board,marker,position):
+def place_marker(minimap,board,marker,position):
+
+    # replace empty space with player marker
     board[position] = marker
-    available[position] = ' '
+    minimap[position] = ' '
 
 def win_check(board,mark):
 
+    # win scenarios
     return ((board[7] ==  board[8] ==  board[9] == mark) or # across the top
     (board[4] ==  board[5] ==  board[6] == mark) or # across the middle
     (board[1] ==  board[2] ==  board[3] == mark) or # across the bottom
@@ -74,7 +79,7 @@ def win_check(board,mark):
 
 def full_board_check(board):
     
-    # check for empty spaces
+    # check for empty spaces on the board
     return ' ' not in board[1:]
 
 def continue_game():
@@ -106,7 +111,7 @@ while play_game:
     
     # reset variables
     board = [' '] * 10   # a list of empty spaces
-    available = [str(num) for num in range(0,10)]
+    minimap = [str(num) for num in range(0,10)]
     
     game_on = True
     clear_output()
@@ -114,25 +119,25 @@ while play_game:
     while game_on:
         
         # show board, choose position, place marker
-        display_board(board,available)
+        display_board(board,minimap)
         position = player_choice(board,player)
-        place_marker(available,board,player,position)
+        place_marker(minimap,board,player,position)
     
         # check for a win
         if win_check(board, player):
             clear_output()
-            display_board(board,available)
+            display_board(board,minimap)
             print('Player '+player+' wins!')
             game_on = False
         else:
             # check for a tie
             if full_board_check(board):
                 clear_output()
-                display_board(board,available)
+                display_board(board,minimap)
                 print("It's a tie!")
                 break
+            # other player's turn
             else:
-                # other player's turn
                 toggle *= -1
                 player = players[toggle]
                 clear_output()

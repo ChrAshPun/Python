@@ -1,7 +1,7 @@
 import random
 import os
 
-# define clear_output()
+# define clear function for Mac & Linux
 def clear_output():
 
 	os.system('clear')
@@ -50,12 +50,16 @@ class Hand:
         self.cards = []  
         self.value = 0   
         self.aces = 0    # add an attribute to keep track of aces
+        self.tens = 0
     
     def add_card(self,card):
         self.cards.append(card)
         self.value += values[card.rank]
         if card.rank == 'Ace':
             self.aces += 1  # add to self.aces
+        elif card.rank == 'Ten' or card.rank == 'Jack' or card.rank == 'Queen' or card.rank == 'King':
+            self.tens += 1
+
     
     def adjust_for_ace(self):
         while self.value > 21 and self.aces:
@@ -67,6 +71,9 @@ class Chips:
     def __init__(self,total=100):
         self.total = total
         self.bet = 0
+
+    def win_blackjack_bet(self):
+        self.total += round(self.bet * 1.5)
         
     def win_bet(self):
         self.total += self.bet
@@ -80,10 +87,12 @@ def take_bet(chips):
         try:
             chips.bet = int(input('How many chips would you like to bet? '))
         except ValueError:
-            print('Please enter a number.')
+            print('Please enter a whole number.')
         else:
             if chips.bet > chips.total:
                 print("Sorry, your bet can't exceed " + str(chips.total))
+            elif chips.bet <= 0:
+                print('Please place a bet.')
             else:
                 break
 
@@ -113,6 +122,15 @@ def hit_or_stand(deck,hand):
         else:
             print("Sorry, please enter h or s.")
             continue
+
+def check_for_blackjack(player):
+        if len(player.cards) == 2:
+            if player.tens == 1 and player.aces == 1:
+                return True
+            else:
+                return False
+        else:
+            return False
 
 def show_dealer_some(dealer):
 
@@ -148,7 +166,7 @@ def show_dealer_all(dealer):
         print("           |     {}|      ".format(values_visual[dealer.cards[0].rank]))
         print("            -------       ")
         print("              {}           ".format(dealer.cards[1]))
-        print("              {}           \n".format("?     of     ?"))
+        print("              {}           \n".format(dealer.cards[0]))
         
     elif len(dealer.cards) == 3:
 
@@ -278,6 +296,10 @@ def player_busts(player,dealer,chips):
     print("\nPlayer busts!")
     chips.lose_bet()
 
+def player_wins_blackjack(player,dealer,chips):
+    print("\nPlayer wins Blackjack!")
+    chips.win_blackjack_bet()
+
 def player_wins(player,dealer,chips):
     print("\nPlayer wins!")
     chips.win_bet()
@@ -305,6 +327,7 @@ while game_on:
         print("\nWelcome to Blackjack!") 
         print("\nThis version of Blackjack does not allow splits.")
         print("The Dealer hits until 17 or more.")
+        print("A winning blackjack pays 3:2.")
         print("\nYour starting amount of chips is: 100")
         player_chips = Chips()
         deal_cards = True
@@ -350,31 +373,41 @@ while game_on:
             player_busts(player_hand,dealer_hand,player_chips)
             break
 
-    # if player hasn't busted, play Dealer's hand until Dealer reaches 17             
+    # if player hasn't busted, play dealer's hand until dealer reaches 17             
     if player_hand.value <= 21:
 
         while dealer_hand.value < 17:
 
             hit(deck,dealer_hand)    
  
-        # Run different winning scenarios
+        # run different winning scenarios
         clear_output()
-        if dealer_hand.value > 21:
+        # check if player got blackjack
+        if check_for_blackjack(player_hand):
+            if dealer_hand.value != 21:
+                player_wins_blackjack(player_hand,dealer_hand,player_chips)
+            else:
+                push(player_hand,dealer_hand) 
+
+        # dealer busts
+        elif dealer_hand.value > 21:
             dealer_busts(player_hand,dealer_hand,player_chips)
 
+        # dealer wins
         elif dealer_hand.value > player_hand.value:
             dealer_wins(player_hand,dealer_hand,player_chips)
 
+        # player wins
         elif dealer_hand.value < player_hand.value:
             player_wins(player_hand,dealer_hand,player_chips)
 
+        # push
         else:
             push(player_hand,dealer_hand)        
 
-    # Inform Player of their chips total 
+    # show all hands & player's total chips
     show_dealer_all(dealer_hand)
     show_player_all(player_hand)
-    print("\nTotal Chips: {}".format(player_chips.total))
 
     # if player busts, ask if they want to play again
     if player_chips.total == 0:
@@ -382,17 +415,20 @@ while game_on:
         print("\nSorry, you ran out of chips!")
         print("Game Over!\n")
 
+        # if player ran out of chips, ask if they want to play again
         while player_chips.total == 0:
 
             x = input("Play again? Enter y or n: ")
             if x == 'y' or x == 'n':
                 break
             else:
-                print("Please try again")  
-                                    
+                print("Please try again.")  
+
+        # go back to the intro                             
         if x == 'y':
             intro = True
             continue
+        # exit game
         else:
             print("Thanks for playing!")
             break   
@@ -402,16 +438,18 @@ while game_on:
         # if player still has chips, ask if they want to keep playing
         while player_chips.total > 0:
 
-            x = input("Do you want to play another hand?")
+            x = input("Do you want to play another hand? Enter y or n: ")
             if x == 'y' or x == 'n':
                 break
             else:
-                print("Please try again")  
-      
+                print("Please try again.")
+
+        # skip the intro & deal another hand
         if x == 'y':
             intro = False
             deal_cards = True
             continue
+        #exit game
         else:
             print("Thanks for playing!")
             break
