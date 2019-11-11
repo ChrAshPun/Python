@@ -323,6 +323,7 @@ playing = False
 while game_on:
 
     while intro:
+        
         clear_output()
         print("\nWelcome to Blackjack!") 
         print("\nThis version of Blackjack does not allow splits.")
@@ -388,19 +389,15 @@ while game_on:
                 player_wins_blackjack(player_hand,dealer_hand,player_chips)
             else:
                 push(player_hand,dealer_hand) 
-
         # dealer busts
         elif dealer_hand.value > 21:
             dealer_busts(player_hand,dealer_hand,player_chips)
-
         # dealer wins
         elif dealer_hand.value > player_hand.value:
             dealer_wins(player_hand,dealer_hand,player_chips)
-
         # player wins
         elif dealer_hand.value < player_hand.value:
             player_wins(player_hand,dealer_hand,player_chips)
-
         # push
         else:
             push(player_hand,dealer_hand)        
