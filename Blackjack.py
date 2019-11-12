@@ -1,10 +1,16 @@
 import random
-import os
+from os import system, name 
 
-# define clear function for Mac & Linux
-def clear_output():
-
-	os.system('clear')
+# define clear_output function 
+def clear_output(): 
+  
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+  
+    # for mac and linux
+    else: 
+        _ = system('clear')    
 
 suits = ('Hearts', 'Diamonds', 'Spades', 'Clubs')
 ranks = ('Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King', 'Ace')
@@ -323,7 +329,7 @@ playing = False
 while game_on:
 
     while intro:
-        
+
         clear_output()
         print("\nWelcome to Blackjack!") 
         print("\nThis version of Blackjack does not allow splits.")

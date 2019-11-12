@@ -1,18 +1,16 @@
-import os
-
-# define clear_output() for Mac
-def clear_output():
-
-	os.system('clear')
-
-'''
-# define clear_output() for PC
-def clear_output():
-
-	os.system('cls')
-'''
-    
+from os import system, name 
 import operator
+
+# define clear_output function 
+def clear_output(): 
+  
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+  
+    # for mac and linux
+    else: 
+        _ = system('clear')     
 
 ops = {
     "+": operator.add,
@@ -21,34 +19,17 @@ ops = {
     "/": operator.truediv
 }  
 
-def display_value_one(value_one):
-    
-    if len(str(value_one)) == 0:
-    
+# trim the value so it fits on the calculator screen
+def trim_value(value):
+    return value[0:13]
+
+# display the calculator
+def display_value(value):
+       
         print(" _________________ ")
         print("| _______________ |")
         print("||               ||")
-        print("||               ||")
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-        
-    elif len(str(value_one)) == 1:
-    
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||             {} ||".format(value_one))
+        print("||{} ||".format(value.rjust(14)))
         print("||_______________||")
         print("| _______________ |")
         print("|  AC|+/-| % | /  |")
@@ -63,409 +44,7 @@ def display_value_one(value_one):
         print("| _______|___|___ |")
         print("|_________________|")
 
-    elif len(str(value_one)) == 2:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||            {} ||".format(value_one))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
-    elif len(str(value_one)) == 3:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||           {} ||".format(value_one))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
-    elif len(str(value_one)) == 4:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||          {} ||".format(value_one))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-        
-    elif len(str(value_one)) == 5:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||         {} ||".format(value_one))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-        
-    elif len(str(value_one)) == 6:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||        {} ||".format(value_one))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
-    elif len(str(value_one)) == 7:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||       {} ||".format(value_one))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-        
-    elif len(str(value_one)) == 8:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||      {} ||".format(value_one))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|") 
-        
-    elif len(str(value_one)) == 9:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||     {} ||".format(value_one))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|") 
-        
-    else:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||    {} ||".format(value_one[0:10]))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
-def display_value_two(value_two):
-    
-    if len(str(value_two)) == 0:
-    
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||               ||")
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-        
-    elif len(str(value_two)) == 1:
-
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||             {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
-    elif len(str(value_two)) == 2:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||            {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
-    elif len(str(value_two)) == 3:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||           {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
-    elif len(str(value_two)) == 4:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||          {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-        
-    elif len(str(value_two)) == 5:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||         {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-        
-    elif len(str(value_two)) == 6:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||        {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
-    elif len(str(value_two)) == 7:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||       {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-        
-        
-    elif len(str(value_two)) == 8:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||      {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|") 
-        
-    elif len(str(value_two)) == 9:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||     {} ||".format(value_two))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|") 
-        
-    else:
-        
-        print(" _________________ ")
-        print("| _______________ |")
-        print("||               ||")
-        print("||    {} ||".format(value_two[0:10]))
-        print("||_______________||")
-        print("| _______________ |")
-        print("|  AC|+/-| % | /  |")
-        print("| ___|___|___|___ |")
-        print("|  7 | 8 | 9 | *  |")
-        print("| ___|___|___|___ |")
-        print("|  4 | 5 | 6 | -  |")
-        print("| ___|___|___|___ |")
-        print("|  1 | 2 | 3 | +  |")
-        print("| ___|___|___|___ |")
-        print("|  0     | . | =  |")
-        print("| _______|___|___ |")
-        print("|_________________|")
-
+# evaluate the expression
 def evaluate(value_one,operator,value_two):
 
     if value_two == '0' and operator == '/':
@@ -473,11 +52,17 @@ def evaluate(value_one,operator,value_two):
     else:
         return ops[operator](float(value_one),float(value_two))
 
-# Global variables
+# global variables
 digits = ['0','1','2','3','4','5','6','7','8','9']
 operations = ['/','*','-','+']
 value_one = ""
 
+clear_output()
+print("This calculator was designed to simulate a real calculator by pressing one button at a time.")
+print("Example: type '+/-' & press Enter to simulate pressing the Plus-minus button.")
+user_input = input("Press Enter to continue: ")
+
+clear_output()
 create_value_one = True
 create_value_two = False
 continue_or_break = False
@@ -491,12 +76,13 @@ while create_value_one:
         
     # display calculator & value_one
     clear_output()
-    display_value_one(value_one)
+    value_one = trim_value(value_one)
+    display_value(value_one)
              
     # user_input = value_one
     user_input = input("Press a button: ")
 
-    # if user inputs AC
+    # if user inputs "AC"
     if user_input == 'AC':
         value_one = ""
         continue
@@ -517,31 +103,33 @@ while create_value_one:
         continue
 
     # if user inputs "+/-"
-    elif user_input == '+/-' and float(value_one) == 0.0:
-        value_one = '0'
-        continue
-
     elif user_input == '+/-':
-        value_one = str(float(value_one)*-1)
-        if value_one[-1] == '0' and value_one[-2] == '.':
-            value_one = str(value_one[:-2])
+        if value_one == '':
+            continue
+        elif float(value_one) == 0.0:
+            value_one = '0'
             continue
         else:
-            continue
+            value_one = str(float(value_one)*-1)
+            # if value ends in ".0", return value as an integer
+            if value_one[-1] == '0' and value_one[-2] == '.':
+                value_one = str(value_one[:-2])
+                continue
+            else:
+                continue
 
     # if user inputs "%"
-    elif user_input == '%' and float(value_one) == 0.0:
-        value_one = '0'
-        continue
-            
     elif user_input == '%':
-
-        value_one = str(float(value_one)/100) 
-        if value_one[-1] == '0' and value_one[-2] == '.':
-            value_one = str(value_one[:-2])
+        if float(value_one) == 0.0:
+            value_one = '0'
             continue
         else:
-            continue
+            value_one = str(float(value_one)/100) 
+            if value_one[-1] == '0' and value_one[-2] == '.':
+                value_one = str(value_one[:-2])
+                continue
+            else:
+                continue
 
     # if user inputs an integer
     elif user_input in digits:
@@ -577,9 +165,11 @@ while create_value_one:
         clear_output()
 
         if value_two == "":
-            display_value_one(value_one)
+            value_one = trim_value(value_one)
+            display_value(value_one)
         else:
-            display_value_two(value_two) 
+            value_two = trim_value(value_two)
+            display_value(value_two) 
 
         # user_input = value_one
         user_input = input("Press a button: ")
@@ -719,7 +309,8 @@ while create_value_one:
     while continue_or_break:
 
         clear_output()
-        display_value_one(value_one)
+        value_one = trim_value(value_one)
+        display_value(value_one)
 
         x = input("Continue? Enter y or n: ")
 

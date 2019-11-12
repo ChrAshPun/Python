@@ -1,9 +1,16 @@
 import random
-import os
+from os import system, name 
 
-def clear_output():
-
-	os.system('clear')
+# define clear_output function 
+def clear_output(): 
+  
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+  
+    # for mac and linux
+    else: 
+        _ = system('clear')    
 
 def intro():
     
