@@ -1,41 +1,38 @@
+from os import system, name 
 from collections import OrderedDict 
 import random
-import os
 
-# define clear_output() for Mac
-def clear_output():
+# define clear_output function 
+def clear_output(): 
+  
+    # for windows 
+    if name == 'nt': 
+        _ = system('cls') 
+    # for mac and linux
+    else: 
+        _ = system('clear')   
 
-	os.system('clear')
-
-'''
-# define clear_output() for PC
-def clear_output():
-
-	os.system('cls')
-'''
-
-# Categories
-cartoon_characters = ["Homer Simpson","Mickey Mouse","Tommy Pickles"]
-tv_shows = ["The Office","Archer","Jane The Virgin","Game of Thrones"]
-random_words = ["flapjack","microwave","tripod","zombie","monkey",]
+# categories
+cartoon_characters = ["Homer Simpson","Mickey Mouse","Tommy Pickles","Patrick Star","SpongeBob SquarePants","Bugs Bunny"]
+tv_shows = ["The Office","The Sopranos","Jane The Virgin","Game of Thrones","Rick and Morty","Friends"]
+video_games = ["Legend of Zelda","Call of Duty","Pokemon","Metal Gear Solid","The Last of Us","Minecraft","World of Warcraft"]
 
 def choose_category():
     
     while True:
 
-        x = input("\nPick a category: \n\n\tRandom Words (r) \n\tTV Shows (s) \n\tCartoon Characters (c) \n\n")
+        # ask player to pick a category
+        x = input("Enter v s or c: ")
 
-        if x.lower() == 'r':
-            return random_words[random.randrange(len(random_words))]
+        if x.lower() == 'v':
+            return video_games[random.randrange(len(video_games))]
         elif x.lower() == 's':
             return tv_shows[random.randrange(len(tv_shows))]
         elif x.lower() == 'c':
             return cartoon_characters[random.randrange(len(cartoon_characters))]
         else:
-            clear_output()
-            print("Sorry, please try again.")
-            continue
-                  
+            print("Please pick a category.")
+            continue                
         break
 
 def hangman_board(player_strikes):
@@ -117,22 +114,23 @@ def hangman_board(player_strikes):
         print("       |               ")
         print("  _____|_____          ")
          
-
+# conceal the phrase
 def hide_func(string):
       
     makelist = []
     
     for x in string:
-        
+        # change characters into "_"
         if x != ' ':
             makelist.append('_')
+        # change everything else into " "
         else:
             makelist.append(' ')
     
     return ' '.join(makelist)
 
 def display_phrase(phrase):
-    print("\n                    " + phrase)
+    print("\n\t\t" + phrase)
 
 def display_win():
     hangman_board(player_strikes)
@@ -202,17 +200,15 @@ def continue_game():
     
     while True:
 
-        x = input("Play again? Enter y' or n: ")
+        x = input("Play again? Enter y or n: ")
             
         if x.lower()=='y':
             return True
-                
         elif x.lower()=='n':
             print("Thanks for playing!")
             return False
-            
         else:
-            print("Sorry, please try again.")
+            print("Please try again.")
             continue
 
 class Strikes:
@@ -230,12 +226,12 @@ while start:
     
     while intro:
         
-        clear_output()
-    
         # intro
+        clear_output()
         print("Welcome to Hangman!")
 
         # choose a category
+        print("\nPick a category: \n\n\tVideo Games (v) \n\tTV Shows (s) \n\tCartoon Characters (c) \n")
         original_phrase = choose_category()
 
         #hide the phrase
@@ -288,6 +284,6 @@ while start:
         clear_output()
         hangman_board(player_strikes)
         display_phrase(open_phrase)
-        print("Game Over!")
+        print("\nGame Over!\n")
         start = continue_game()
         break

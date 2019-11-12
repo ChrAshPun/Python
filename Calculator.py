@@ -7,7 +7,6 @@ def clear_output():
     # for windows 
     if name == 'nt': 
         _ = system('cls') 
-  
     # for mac and linux
     else: 
         _ = system('clear')     
