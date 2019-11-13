@@ -1,10 +1,11 @@
-import random
 import os
+import random
 
-# define clear_output()
 def clear_output():
-
-	os.system('clear')
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')
 
 # create 7 slots with 6 levels of depth
 slot1 = [0] + [' ' for x in range(1,7)]
