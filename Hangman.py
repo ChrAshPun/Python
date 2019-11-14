@@ -1,16 +1,12 @@
-from os import system, name 
-from collections import OrderedDict 
+import os
 import random
+from collections import OrderedDict 
 
-# define clear_output function 
-def clear_output(): 
-  
-    # for windows 
-    if name == 'nt': 
-        _ = system('cls') 
-    # for mac and linux
-    else: 
-        _ = system('clear')   
+def clear_output():
+    if os.name == 'nt':
+        os.system('cls')
+    else:
+        os.system('clear')  
 
 # categories
 cartoon_characters = ["Homer Simpson","Mickey Mouse","Tommy Pickles","Patrick Star","SpongeBob SquarePants","Bugs Bunny"]
